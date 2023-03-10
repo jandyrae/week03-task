@@ -55,9 +55,6 @@ int main()
 		case 4:
 			// option '4' - Program should create a new account
 			// add_account_holder(accounts); //using the local function (still doesn't work)
-			//name = account.account_info_name();
-			//balance= account.account_info_balance();
-			//account.account_create(name, balance, accounts);
 			account.account_create(accounts);
 			break;
 

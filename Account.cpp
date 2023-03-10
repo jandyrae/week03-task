@@ -4,9 +4,9 @@
 int Account::next_ID = 1;
 // list<Account>& account_list;
 // default constructor
-Account::Account() : account_ID{ 0 }, account_name{ "" }, account_balance{ 0.0 } {}
+Account::Account() : account_ID{ 0 }, account_name{ "" }, account_balance{ 0.0f } {}
 // alternate constructor
-Account::Account(int id, string name, float balance) : account_ID (next_ID), account_name (name), account_balance(0.0) {}
+Account::Account(int id, string name, float balance) : account_ID (next_ID), account_name (name), account_balance(0.0f) {}
 /**/
 void Account::set_name(string name) 
 {
@@ -35,6 +35,7 @@ void Account::display_options() const
 	cout << endl << "4. Add new account";
 	cout << endl << "Your choice: ";
 }
+
 void Account::account_info()
 {
 	cout << "Enter the name: ";
@@ -44,6 +45,7 @@ void Account::account_info()
 	account_ID = ++next_ID;
 	// cout << account_ID << endl; 
 };
+
 void Account::account_display() const
 {
 	cout.setf(ios::fixed);
@@ -51,38 +53,21 @@ void Account::account_display() const
 	cout << setprecision(2);
 	cout << endl << "Account ID : " << account_ID << "   Name: " << account_name << "   Balance: $" << account_balance << endl;
 };
+
 void Account::account_deposit(float deposit)
 {
 	cout << "Amount to deposit: $";
 	cin >> deposit;
 	account_balance += deposit;
 };
+
 void Account::account_withdrawl(float withdrawl)
 {
 	cout << "Amount to withdraw: $";
 	cin >> withdrawl;
 	account_balance -= withdrawl;
 };
-string Account::account_info_name()
-{
-	cout << "Enter the name: ";
-	getline(cin, account_name);
-	return account_name;
-}
-float Account::account_info_balance()
-{
-	cout << "Enter the balance: ";
-	cin >> account_balance;
-	return account_balance;
-}
-/*
-void Account::account_create(string account_name, float account_balance, list<Account>& account_list)
-{
-	account_ID = next_ID++;
-	Account account(account_ID, get_name(), get_balance()); // create Account
-	account_list.push_back(account);
-};
-*/
+
 void Account::account_create(list<Account>& account_list)
 {
 	account_ID = next_ID++;
