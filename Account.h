@@ -15,7 +15,7 @@ private:
 	static int next_ID;
 	
 public:
-	list<Account> account_list; // needed here?
+	// list<Account> account_list; // needed here?
 	Account();
 	Account(int account_ID, string account_name, float account_balance);
 	void set_name(string name);
@@ -29,6 +29,7 @@ public:
 	void account_withdrawl(float withdrawl);
 	string account_info_name(void);
 	float account_info_balance(void);
-	void account_create(string account_name, float account_balance, list<Account>& account_list);
+	//void account_create(string account_name, float account_balance, list<Account>& account_list);
+	void account_create(list<Account>& account_list);
 	void display_account_list(list<Account>& account_list);
 };

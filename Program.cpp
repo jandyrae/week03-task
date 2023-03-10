@@ -9,9 +9,9 @@ using std::cin;
 using std::endl;
 using namespace std;
 
-int Account::next_ID = 1;
 void add_account_holder(list<Account>& account_list);
-list<Account>& account_list;
+void display_account_list(list<Account>& account_list);
+// list<Account>& account_list;
 int main()
 {
 	int option;
@@ -38,6 +38,7 @@ int main()
 		case 1:
 			// option '1' - Program should display account information
 			// new_account.account_display();
+			// account.display_account_list(accounts);
 			account.display_account_list(accounts);
 			break;
 
@@ -53,10 +54,11 @@ int main()
 
 		case 4:
 			// option '4' - Program should create a new account
-			add_account_holder(accounts);
+			// add_account_holder(accounts); //using the local function (still doesn't work)
 			//name = account.account_info_name();
 			//balance= account.account_info_balance();
 			//account.account_create(name, balance, accounts);
+			account.account_create(accounts);
 			break;
 
 		default:
@@ -88,8 +90,7 @@ void add_account_holder(list<Account>& account_list)
 	getline(cin, name);
 	cout << "Enter your beginning balance: $";
 	getline(cin, balance);
-	int id = 1;
+	int id = 1; // not ideal, just for testing
 	Account account(id++, name, stof(balance));
-
 	account_list.push_back(account);
 };

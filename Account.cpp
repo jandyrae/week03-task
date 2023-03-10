@@ -6,7 +6,7 @@ int Account::next_ID = 1;
 // default constructor
 Account::Account() : account_ID{ 0 }, account_name{ "" }, account_balance{ 0.0 } {}
 // alternate constructor
-Account::Account(int id, string name, float balance) : account_ID (next_ID++), account_name (name), account_balance(0.0) {}
+Account::Account(int id, string name, float balance) : account_ID (next_ID), account_name (name), account_balance(0.0) {}
 /**/
 void Account::set_name(string name) 
 {
@@ -41,7 +41,7 @@ void Account::account_info()
 	cin >> account_name;
 	cout << endl << "Enter the balance: ";
 	cin >> account_balance;
-	account_ID = next_ID++;
+	account_ID = ++next_ID;
 	// cout << account_ID << endl; 
 };
 void Account::account_display() const
@@ -75,11 +75,23 @@ float Account::account_info_balance()
 	cin >> account_balance;
 	return account_balance;
 }
+/*
 void Account::account_create(string account_name, float account_balance, list<Account>& account_list)
 {
 	account_ID = next_ID++;
 	Account account(account_ID, get_name(), get_balance()); // create Account
 	account_list.push_back(account);
+};
+*/
+void Account::account_create(list<Account>& account_list)
+{
+	account_ID = next_ID++;
+	cout << "\nEnter the name: ";
+	cin >> account_name;
+	cout << "\nEnter the balance: ";
+	cin >> account_balance;
+	Account account(account_ID, account_name, account_balance); // create an Account
+	account_list.push_back(account); // push new account to list
 };
 
 void Account::display_account_list(list<Account>& account_list)
