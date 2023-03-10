@@ -9,23 +9,23 @@ using std::cin;
 using std::endl;
 using namespace std;
 
+int Account::next_ID = 1;
 void add_account_holder(list<Account>& account_list);
-void display_account_list(list<Account>& account_list);
-// list<Account>& account_list;
+list<Account>& account_list;
 int main()
 {
 	int option;
-	float deposit{}, withdrawl{};
-	// string name, balance;
+	string name = "";
+	float deposit{}, withdrawl{}, balance = 0.0;
 	bool open_transaction = true;
-	Account new_account;
-	// declare list
+	Account account;
+	// Account account(int account_ID, string account_name, float account_balance);
 	list<Account> accounts;
 	// declare iterator
 	// list<Account>::iterator it;
 	
 	while (open_transaction) {
-		new_account.display_options();
+		account.display_options();
 		cin >> option;
 		switch (option)
 		{
@@ -38,23 +38,25 @@ int main()
 		case 1:
 			// option '1' - Program should display account information
 			// new_account.account_display();
-			new_account.display_account_list(accounts);
+			account.display_account_list(accounts);
 			break;
 
 		case 2:
 			// option '2' - Program should prompt for a deposit amount
-			new_account.account_deposit(deposit);
+			account.account_deposit(deposit);
 			break;
 
 		case 3:
 			// option '3' - Program should prompt for a withdrawal amount
-			new_account.account_withdrawl(withdrawl);
+			account.account_withdrawl(withdrawl);
 			break;
 
 		case 4:
 			// option '4' - Program should create a new account
-			// add_account_holder(account_list);
-			new_account.account_create(accounts);
+			add_account_holder(accounts);
+			//name = account.account_info_name();
+			//balance= account.account_info_balance();
+			//account.account_create(name, balance, accounts);
 			break;
 
 		default:
@@ -65,18 +67,8 @@ int main()
 
 }
 
-void add_account_holder(list<Account>& account_list)
-{
-	string name;
-	string balance;
-	cout << "Enter your account name: ";
-	getline(cin, name);
-	cout << "Enter your beginning balance: $";
-	getline(cin, balance);
-	//int id = 1;
-	//Account account{ name, stof(balance)};
-	//account_list.push_back(account);
-};
+
+
 void display_account_list(list<Account>& account_list)
 {
 	list<Account>::iterator it;
@@ -85,3 +77,19 @@ void display_account_list(list<Account>& account_list)
 		it->account_display();
 	}
 }
+
+
+
+void add_account_holder(list<Account>& account_list)
+{
+	string name;
+	string balance;
+	cout << "Enter your account name: ";
+	getline(cin, name);
+	cout << "Enter your beginning balance: $";
+	getline(cin, balance);
+	int id = 1;
+	Account account(id++, name, stof(balance));
+
+	account_list.push_back(account);
+};

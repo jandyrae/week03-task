@@ -2,12 +2,12 @@
 #include <list>
 
 int Account::next_ID = 1;
+// list<Account>& account_list;
 // default constructor
 Account::Account() : account_ID{ 0 }, account_name{ "" }, account_balance{ 0.0 } {}
 // alternate constructor
 Account::Account(int id, string name, float balance) : account_ID (next_ID++), account_name (name), account_balance(0.0) {}
-list<Account>& account_list;
-
+/**/
 void Account::set_name(string name) 
 {
 	account_name = name;
@@ -24,6 +24,7 @@ float Account::get_balance()
 {
 	return account_balance;
 }
+
 void Account::display_options() const
 {
 	cout << endl << "Account menu: ";
@@ -42,8 +43,7 @@ void Account::account_info()
 	cin >> account_balance;
 	account_ID = next_ID++;
 	// cout << account_ID << endl; 
-	Account::account_list
-}
+};
 void Account::account_display() const
 {
 	cout.setf(ios::fixed);
@@ -63,25 +63,30 @@ void Account::account_withdrawl(float withdrawl)
 	cin >> withdrawl;
 	account_balance -= withdrawl;
 };
-void Account::account_create(list<Account>& account_list)
+string Account::account_info_name()
 {
-	string account_name, account_balance;
 	cout << "Enter the name: ";
 	getline(cin, account_name);
-	Account::set_name(account_name);
-	cout << endl << "Enter the balance: ";
-	getline(cin, account_balance);
-	Account::set_balance(stof(account_balance));
+	return account_name;
+}
+float Account::account_info_balance()
+{
+	cout << "Enter the balance: ";
+	cin >> account_balance;
+	return account_balance;
+}
+void Account::account_create(string account_name, float account_balance, list<Account>& account_list)
+{
 	account_ID = next_ID++;
-	Account account( account_ID, account_name, stof(account_balance)); // create Account
+	Account account(account_ID, get_name(), get_balance()); // create Account
 	account_list.push_back(account);
-	//return account_list;
 };
+
 void Account::display_account_list(list<Account>& account_list)
 {
 	list<Account>::iterator it;
-		for (it = account_list.begin(); it != account_list.end(); it++)
-		{
-			it->account_display();
-		}
+	for (it = account_list.begin(); it != account_list.end(); it++)
+	{
+		it->account_display();
+	}
 }
