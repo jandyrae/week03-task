@@ -16,7 +16,7 @@ int main()
 {
 	int option;
 	string name = "";
-	float deposit{}, withdrawl{}, balance = 0.0;
+	float deposit{}, withdrawl{}, balance{};
 	bool open_transaction = true;
 	Account account;
 	// Account account(int account_ID, string account_name, float account_balance);

@@ -1,7 +1,7 @@
 #include "Account.h"
 #include <list>
 
-int Account::next_ID = 1;
+int Account::next_ID = 0;
 
 // default constructor
 Account::Account() : account_ID{ 0 }, account_name{ "" }, account_balance{ 0.0f } {}
