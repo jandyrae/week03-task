@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
-// #include <list>
 #include <iterator>
 #include "Account.h"
 using std::cout;
@@ -20,9 +19,7 @@ int main()
 	bool open_transaction = true;
 	Account account;
 	list<Account> accounts;
-	// declare iterator
 	list<Account>::iterator it;
-	
 	
 	while (open_transaction) {
 		display_options();
