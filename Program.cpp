@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
-#include <list>
+// #include <list>
 #include <iterator>
 #include "Account.h"
 using std::cout;
@@ -9,23 +9,23 @@ using std::cin;
 using std::endl;
 using namespace std;
 
-
+void display_options();
 list<Account>::iterator find_by_id(list<Account>& account_list, int account_ID);
 
 int main()
 {
-	int option;
+	int option, id;
 	string name = "";
 	float deposit{}, withdrawl{}, balance{};
 	bool open_transaction = true;
 	Account account;
-	// Account account(int account_ID, string account_name, float account_balance);
 	list<Account> accounts;
 	// declare iterator
 	list<Account>::iterator it;
 	
+	
 	while (open_transaction) {
-		account.display_options();
+		display_options();
 		cin >> option;
 		switch (option)
 		{
@@ -38,34 +38,54 @@ int main()
 		case 1:
 			// option '1' - Program should display account information
 			// new_account.account_display();
+			cout << "\n-----------------\n";
+			if (accounts.size() == 0)
+			{
+				cout << "No accounts to display.";
+				cout << "\n-----------------\n";
+			};
 			account.display_account_list(accounts);
 			break;
 
 		case 2:
 			// option '2' - Program should prompt for a deposit amount
-			account.account_deposit(deposit);
+			cout << "What account ID do you want to deposit into? ";
+			cin >> id;
+			it = find_by_id(accounts, id);
+			if (it != accounts.end())
+			{
+				it->account_deposit(deposit);
+			}
 			break;
 
 		case 3:
 			// option '3' - Program should prompt for a withdrawal amount
-			account.account_withdrawl(withdrawl);
+			cout << "What account ID do you want to withdraw from? ";
+			cin >> id;
+			it = find_by_id(accounts, id);
+			if (it != accounts.end())
+			{
+				it->account_withdrawl(withdrawl);
+			}
 			break;
 
 		case 4:
 			// option '4' - Program should create a new account
+			account.account_info();
 			account.account_create(accounts);
 			break;
 
 		case 5:
 			// option '5' - Program should find an account by its id
-			int id;
+			// int id;
 			cout << "What account ID do you want to display? ";
 			cin >> id;
 			it = find_by_id(accounts, id);
 			if (it != accounts.end())
 			{
-				cout << "------------------";
+				cout << "------------------\n";
 				it->account_display();
+				
 			}
 			else {
 				cout << "Unable to locate Account by that ID ";
@@ -78,6 +98,18 @@ int main()
 		}
 	}
 
+}
+
+void display_options()
+{
+	cout << endl << "Account menu: ";
+	cout << endl << "0. Quit Program";
+	cout << endl << "1. Display Account Information";
+	cout << endl << "2. Add a deposit to an account";
+	cout << endl << "3. Withdraw from an account";
+	cout << endl << "4. Add new account";
+	cout << endl << "5. Display account by ID";
+	cout << endl << "Your choice: ";
 }
 
 list<Account>::iterator find_by_id(list<Account>& account_list, int account_ID)
