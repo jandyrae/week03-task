@@ -9,9 +9,9 @@ using std::cin;
 using std::endl;
 using namespace std;
 
-void add_account_holder(list<Account>& account_list);
-void display_account_list(list<Account>& account_list);
-// list<Account>& account_list;
+
+list<Account>::iterator find_by_id(list<Account>& account_list, int account_ID);
+
 int main()
 {
 	int option;
@@ -22,7 +22,7 @@ int main()
 	// Account account(int account_ID, string account_name, float account_balance);
 	list<Account> accounts;
 	// declare iterator
-	// list<Account>::iterator it;
+	list<Account>::iterator it;
 	
 	while (open_transaction) {
 		account.display_options();
@@ -38,7 +38,6 @@ int main()
 		case 1:
 			// option '1' - Program should display account information
 			// new_account.account_display();
-			// account.display_account_list(accounts);
 			account.display_account_list(accounts);
 			break;
 
@@ -54,8 +53,23 @@ int main()
 
 		case 4:
 			// option '4' - Program should create a new account
-			// add_account_holder(accounts); //using the local function (still doesn't work)
 			account.account_create(accounts);
+			break;
+
+		case 5:
+			// option '5' - Program should find an account by its id
+			int id;
+			cout << "What account ID do you want to display? ";
+			cin >> id;
+			it = find_by_id(accounts, id);
+			if (it != accounts.end())
+			{
+				cout << "------------------";
+				it->account_display();
+			}
+			else {
+				cout << "Unable to locate Account by that ID ";
+			}
 			break;
 
 		default:
@@ -66,28 +80,14 @@ int main()
 
 }
 
-
-
-void display_account_list(list<Account>& account_list)
+list<Account>::iterator find_by_id(list<Account>& account_list, int account_ID)
 {
 	list<Account>::iterator it;
 	for (it = account_list.begin(); it != account_list.end(); it++)
 	{
-		it->account_display();
+		if (it->get_id() == account_ID) {
+			return it;
+		}
 	}
+	return it;
 }
-
-
-
-void add_account_holder(list<Account>& account_list)
-{
-	string name;
-	string balance;
-	cout << "Enter your account name: ";
-	getline(cin, name);
-	cout << "Enter your beginning balance: $";
-	getline(cin, balance);
-	int id = 1; // not ideal, just for testing
-	Account account(id++, name, stof(balance));
-	account_list.push_back(account);
-};

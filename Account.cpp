@@ -2,27 +2,15 @@
 #include <list>
 
 int Account::next_ID = 1;
-// list<Account>& account_list;
+
 // default constructor
 Account::Account() : account_ID{ 0 }, account_name{ "" }, account_balance{ 0.0f } {}
 // alternate constructor
 Account::Account(int id, string name, float balance) : account_ID (next_ID), account_name (name), account_balance(0.0f) {}
-/**/
-void Account::set_name(string name) 
+
+int Account::get_id()
 {
-	account_name = name;
-}
-void Account::set_balance(float balance)
-{
-	account_balance = balance;
-}
-string Account::get_name()
-{
-	return account_name;
-}
-float Account::get_balance()
-{
-	return account_balance;
+	return account_ID;
 }
 
 void Account::display_options() const
@@ -33,6 +21,7 @@ void Account::display_options() const
 	cout << endl << "2. Add a deposit to an account";
 	cout << endl << "3. Withdraw from an account";
 	cout << endl << "4. Add new account";
+	cout << endl << "5. Display account by ID";
 	cout << endl << "Your choice: ";
 }
 
@@ -44,7 +33,7 @@ void Account::account_info()
 	cin >> account_balance;
 	account_ID = ++next_ID;
 	// cout << account_ID << endl; 
-};
+}
 
 void Account::account_display() const
 {
@@ -52,21 +41,21 @@ void Account::account_display() const
 	cout.setf(ios::showpoint);
 	cout << setprecision(2);
 	cout << endl << "Account ID : " << account_ID << "   Name: " << account_name << "   Balance: $" << account_balance << endl;
-};
+}
 
 void Account::account_deposit(float deposit)
 {
 	cout << "Amount to deposit: $";
 	cin >> deposit;
 	account_balance += deposit;
-};
+}
 
 void Account::account_withdrawl(float withdrawl)
 {
 	cout << "Amount to withdraw: $";
 	cin >> withdrawl;
 	account_balance -= withdrawl;
-};
+}
 
 void Account::account_create(list<Account>& account_list)
 {
@@ -76,8 +65,8 @@ void Account::account_create(list<Account>& account_list)
 	cout << "\nEnter the balance: ";
 	cin >> account_balance;
 	Account account(account_ID, account_name, account_balance); // create an Account
-	account_list.push_back(account); // push new account to list
-};
+	account_list.push_back(account); // push new obj account to list
+}
 
 void Account::display_account_list(list<Account>& account_list)
 {
@@ -87,3 +76,4 @@ void Account::display_account_list(list<Account>& account_list)
 		it->account_display();
 	}
 }
+
